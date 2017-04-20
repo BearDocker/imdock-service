@@ -1,0 +1,129 @@
+version: '2'
+
+services:
+
+    #--------------------------------------
+    # Mail Testing
+    #--------------------------------------
+    imdock-mailhog:
+       image: phpdockerio/mailhog:latest
+       container_name: imdock-mailhog
+       ports:
+         - "8025:8025"
+         - "1025:1025"
+
+    imdock-mailcatcher:
+       #restart: always
+       image: schickling/mailcatcher:latest
+       container_name: imdock-mailcatcher
+       ports:
+         - "1080:1080"
+         - "1025:1025"
+
+
+    #--------------------------------------
+    # Cache
+    #--------------------------------------
+    imdock-redis:
+      #restart: always
+      image: redis:latest
+      container_name: imdock-redis
+      volumes:
+          - redis-data:/data
+
+
+    #--------------------------------------
+    # Database
+    #--------------------------------------
+    imdock-mariadb:
+           #restart: always
+           image: mariadb:10.1
+           container_name: imdock-mariadb
+           ports:
+              - "3306:3306"
+           environment:
+             - MYSQL_ROOT_PASSWORD=P@ssw0rd
+             - MYSQL_DATABASE=test
+             - MYSQL_USER=adminuser
+             - MYSQL_PASSWORD=P@ssw0rd
+           command:  --character-set-server=utf8
+                     --collation-server=utf8_unicode_ci
+                     --connect-timeout=10
+                     --max-connections=1000
+                     --max-allowed-packet=32M
+                     --thread-cache-size=300
+                     --sort-buffer-size=4M
+                     --bulk-insert-buffer-size=16M
+                     --tmp-table-size=256M
+                     --max-heap-table-size=2048M
+                     --query-cache-limit=4M
+                     --query-cache-size=64M
+                     --query-cache-type=0
+                     --long-query-time=10
+                     --expire-logs-days=10
+                     --max-binlog-size=100M
+                     --innodb-buffer-pool-size=256M
+                     --innodb-log-buffer-size=32M
+                     --innodb-file-per-table=1
+                     --innodb-open-files=400
+                     --innodb-io-capacity=400
+                     --innodb-flush-method=O_DIRECT
+                     --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+           volumes:
+             - mariadb-data:/var/lib/mysql
+             - ./timezone/Taipei:/etc/localtime
+             - ../tmp:/imdock
+
+    imdock-mysql:
+       #restart: always
+       image: mysql:5.7
+       container_name: imdock-mysql
+       ports:
+          - "3306:3306"
+       environment:
+         - MYSQL_ROOT_PASSWORD=P@ssw0rd
+         - MYSQL_DATABASE=test
+         - MYSQL_USER=adminuser
+         - MYSQL_PASSWORD=P@ssw0rd
+       command:  --character-set-server=utf8
+                 --collation-server=utf8_unicode_ci
+                 --connect-timeout=10
+                 --max-connections=1000
+                 --max-allowed-packet=32M
+                 --thread-cache-size=300
+                 --sort-buffer-size=4M
+                 --bulk-insert-buffer-size=16M
+                 --tmp-table-size=256M
+                 --max-heap-table-size=2048M
+                 --query-cache-limit=4M
+                 --query-cache-size=64M
+                 --query-cache-type=0
+                 --long-query-time=10
+                 --expire-logs-days=10
+                 --max-binlog-size=100M
+                 --innodb-buffer-pool-size=256M
+                 --innodb-log-buffer-size=32M
+                 --innodb-file-per-table=1
+                 --innodb-open-files=400
+                 --innodb-io-capacity=400
+                 --innodb-flush-method=O_DIRECT
+                 --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+       volumes:
+         - ../mysql:/var/lib/mysql
+         - ./timezone/Taipei:/etc/localtime
+         - ../tmp:/imdock
+
+
+    imdock-postgres:
+        image: postgres:9.6
+        container_name: imdock-postgres
+        environment:
+          - POSTGRES_USER=adminuser
+          - POSTGRES_PASSWORD=P@ssw0rd
+          - POSTGRES_DB=P@ssw0rd
+
+volumes:
+    mariadb-data:
+      driver: local
+    redis-data:
+      driver: local
