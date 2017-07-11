@@ -24,7 +24,4 @@ Mysql, Redis, Postgres, Mailcatcher, Mailhog, PureFtp
     imdock-ftp ~ $ pure-pw useradd imagine10255 -u ftpuser -d /home/ftpusers/imagine10255
     imdock-ftp ~ $ pure-pw mkdb
 
-    #maybe run this
-    imdock-ftp ~ $ /usr/sbin/pure-ftpd -c 100 -C 100 -l puredb:/etc/pure-ftpd/pureftpd.pdb -E -j -R -P $PUBLICHOST -p 30000:30209 &
-
 Your Client Ftp Setting [Transfer mode=Active(POST)] 主動式
