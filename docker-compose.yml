@@ -44,7 +44,7 @@ services:
            container_name: imdock-mariadb
            hostname: imdock-mariadb
            ports:
-              - "3306:3306"
+              - "3307:3306"
            environment:
              - MYSQL_ROOT_PASSWORD=P@ssw0rd
              - MYSQL_DATABASE=test
@@ -72,7 +72,7 @@ services:
                      --innodb-open-files=400
                      --innodb-io-capacity=400
                      --innodb-flush-method=O_DIRECT
-                     --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+                     --sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
            volumes:
              - mariadb-data:/var/lib/mysql
              - ./timezone/Taipei:/etc/localtime
@@ -114,7 +114,8 @@ services:
                  --innodb-flush-method=O_DIRECT
                  --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
        volumes:
-         - ../mysql:/var/lib/mysql
+        #  - ../mysql:/var/lib/mysql
+         - mysql-data:/var/lib/mysql
          - ./timezone/Taipei:/etc/localtime
          - ../tmp:/imdock
 
