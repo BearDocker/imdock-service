@@ -25,3 +25,12 @@ Mysql, Redis, Postgres, Mailcatcher, Mailhog, PureFtp
     imdock-ftp ~ $ pure-pw mkdb
 
 Your Client Ftp Setting [Transfer mode=Active(POST)] 主動式
+
+
+## How to backup mysql :
+```
+# setting your mysqldump.sh (db-name, db-password, backup-path)
+~ $ crontab -e
+# add this 每天半夜3點半執行備份,並且保留7天
+30 03 * * * sh /{your_imdock-service_path}/mysqldump.sh
+```
