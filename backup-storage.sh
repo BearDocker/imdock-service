@@ -8,7 +8,7 @@ PARM1=${1};
  #===================BACKUP-Info===================
   BACKUP_FROM_DIR="your_backup_from_path" # ex: "/home/adminuser/docker/website/source-code/public/ app" 注意空格
  BACKUP_SAVE_NAME=yourwebsite-storage-backup-${TIME}
-    BACKUP_TO_DIR="/home/adminuser/Dropbox/backups/storage"
+    BACKUP_TO_DIR="your_backup_path"  # ex: /home/adminuser/Dropbox/backups/storage
 
 
 MKDIR="$(which mkdir)"
