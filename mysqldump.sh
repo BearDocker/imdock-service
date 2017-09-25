@@ -15,7 +15,7 @@ TIME="$(date +"%Y%m%d-%H%M%S")"
 #===================BACKUP-Info===================
   BACKUP_DB_NAME=your_db_name
 BACKUP_SAVE_NAME=${BACKUP_DB_NAME}-backup-${TIME}
-   BACKUP_TO_DIR=your_backup_path  # ex: /home/adminuser/docker/backups/db
+   BACKUP_TO_DIR=your_backup_path  # ex: /home/adminuser/Dropbox/backups/db
 
 
 # mysql, mysqldump and some other bin's path
