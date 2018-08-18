@@ -24,23 +24,6 @@ services:
 
 
     #--------------------------------------
-    # FTP
-    #--------------------------------------
-    imdock-ftp:
-      #restart: always
-      image: stilliard/pure-ftpd
-      container_name: imdock-ftp
-      ports:
-          - "21:21"
-          - "30000-30020:30000-30020"
-      environment:
-          PUBLICHOST: localhost
-      volumes:
-          - "./imdock-ftpd:/etc/pure-ftpd"
-          # - "/home/imagine10255/docker/170610-joy/source-code:/home/ftpusers/glorialu"
-
-
-    #--------------------------------------
     # Cache
     #--------------------------------------
     imdock-redis:
@@ -129,7 +112,7 @@ services:
                  --innodb-open-files=400
                  --innodb-io-capacity=400
                  --innodb-flush-method=O_DIRECT
-                 --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+                 --sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
        volumes:
         #  - ../mysql:/var/lib/mysql
          - mysql-data:/var/lib/mysql
