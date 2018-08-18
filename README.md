@@ -27,6 +27,16 @@ Mysql, Redis, Postgres, Mailcatcher, Mailhog, PureFtp
 Your Client Ftp Setting [Transfer mode=Active(POST)] 主動式
 
 
+## How to restore mysql :
+```
+$ docker exec -i imdock-mysql mysql -uroot -pP@ssw0rd {YOUR_DB_NAME} < {YOUR_BACKUP_SQL_FILE_NAME}.sql
+```
+
+`ERROR 1406 (22001) at line 73: Data too long for column 'name' at row 1` ?
+
+--sql-mode=, Delete "STRICT_TRANS_TABLES"
+
+
 ## How to backup mysql :
 ```
 # setting your mysqldump.sh (db-name, db-password, backup-path)
